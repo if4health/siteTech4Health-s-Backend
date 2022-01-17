@@ -2,7 +2,7 @@
 
 ![](https://if4health.netlify.app/logo/opt-if4health-halfsize.png)
 
-This is my 3rd Node.JS project. I developed a static webpage for [IF4Health](https://if4health.netlify.app/) Research Group. Thus I decided to create a server to manage published works and students. The idea is to develop CRUDs for both sections - published works and students - while learning a bit of MERN stack. To start this project fast I used Express-generator tool.
+This is my 3rd Node.JS project. The goal of this project is to learn how to use Schemas. Therefore, I replace mongoDB package by mongoose package to enable Schemas validation.
 
 ## Requirements
 - NodeJS [https://nodejs.org/en/](https://nodejs.org/en/)

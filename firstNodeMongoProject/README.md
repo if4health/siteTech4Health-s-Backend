@@ -2,7 +2,7 @@
 
 ![](https://if4health.netlify.app/logo/opt-if4health-halfsize.png)
 
-This is my first Node.JS project. I developed a static webpage for [IF4Health](https://if4health.netlify.app/) Research Group. Thus I decided to create a server to manage published works and students. The idea is to develop CRUDs for both sections - published works and students - while learning a bit of MERN stack. I will deploy this application when ready, but I have a lot to learn.
+This is my first Node.JS project. The goal is to create my first NodeJS application to manage the students belonging [IF4Health](https://if4health.netlify.app/) Research Group. Promise programing model is the way to go through this NodeJS code. [Traversy Media YouTube Channel](https://www.youtube.com/c/TraversyMedia) was really helpful in this first project. Personal main challenges addressed in this project are Mongo DB (never studied before) and file uploading. 
 
 ## Requirements
 - NodeJS [https://nodejs.org/en/](https://nodejs.org/en/)
