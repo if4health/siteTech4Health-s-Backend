@@ -16,11 +16,11 @@ npm install
 ```
 
 ## Usage
-Open a terminal, go to the project directory, create directory for uploads, and start the server.
+Open a terminal, go to the project directory, create directories for uploads on public folder, and start the server.
 ```sh
 cd <this_project_dir>
-mkdir uploads/images
-mkdir uploads/pdf
+mkdir public/images
+mkdir public/pdf
 npm dev start
 ```
 You should be able to access the running server in a web browser:

@@ -1,10 +1,10 @@
 {
-  "name": "thirdmernproject",
+  "name": "fourthmernproject",
   "version": "1.0.0",
-  "description": "terceiro app usando MERN stak",
+  "description": "quarto app usando MERN stak",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "dev": "nodemon ./bin/www"
   },
   "author": "Andre del Mestre",
@@ -12,6 +12,7 @@
   "dependencies": {
     "body-parser": "^1.19.1",
     "debug": "~2.6.9",
+    "dotenv": "^16.0.0",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "express-fileupload": "^1.2.1",

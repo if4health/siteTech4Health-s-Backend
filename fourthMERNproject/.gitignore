@@ -1,0 +1,6 @@
+package-lock.json
+node_modules
+public/images
+public/pdf
+if4health.sublime-workspace
+.env
