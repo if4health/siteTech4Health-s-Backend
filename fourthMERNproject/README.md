@@ -16,6 +16,7 @@ mongosh --port 27017 -u mongoadmin -p  --authenticationDatabase 'admin'
 - NodeJS [https://nodejs.org/en/](https://nodejs.org/en/)
 - NPM [https://www.python.org/downloads/](https://www.npmjs.com/)
 - MongoDB [https://www.mongodb.com/](https://www.mongodb.com/)
+- Docker e Docker Compose [https://docs.docker.com/](https://docs.docker.com/)
 
 ## Installation
 Install dependecies described in `package.json`
@@ -42,7 +43,7 @@ docker-compose logs -f
 
 You should be able to access the running server in a web browser:
 ```sh
-http://localhost:3003/
+http://localhost:${SERVER_PORT}/
 ```
 
 ## Usage - Local
@@ -57,7 +58,7 @@ npm run start
 ```
 You should be able to access the running server in a web browser:
 ```sh
-http://localhost:3003/
+http://localhost:${SERVER_PORT}/
 ```
 
 ## Routes
