@@ -1,0 +1,36 @@
+version: "3.1"
+services:
+  db:
+    # image: mongo:4.2
+    image: mongo:latest
+    container_name: DB_IF4HEALTH
+    restart: always
+    ports:
+      - ${DB_PORT}:27017
+    environment:
+      MONGO_INITDB_DATABASE: ${DB_NAME}
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS}
+
+  api:
+    # image: if4health-adm:latest
+    container_name: API_IF4HEALTH
+    build: ./
+    env_file:
+     - .env
+    # restart: always
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    # depends_on:
+    #   - db
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: npm run start
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    external_links:
+      - db

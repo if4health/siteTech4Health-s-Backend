@@ -4,7 +4,7 @@
   "description": "terceiro app usando MERN stak",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "dev": "nodemon ./bin/www"
   },
   "author": "Andre del Mestre",

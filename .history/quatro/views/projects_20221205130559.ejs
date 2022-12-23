@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IF4HEALTH Site Management</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">  
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://if4health.netlify.app/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="https://if4health.netlify.app/css/timeline.css">
+
+  </head>
+<body>
+  <nav name="topo" class="navbar navbar-expand-lg navbar-dark">
+    <button class="navbar-toggler" data-target="#myNavbar" data-toggle="collapse" type="button">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="navbar-nav">
+        <li>
+          <a class="nav-link" href="/"><i aria-hidden="true" class="fa fa-lg fa-home"></i> Home</a>
+        </li>
+        <li>
+          <a class="nav-link" href="/students"><i aria-hidden="true" class="fa fa-lg fa-users"></i> Alunos</a>
+        </li>
+        <li>
+          <a class="nav-link" href="/works"><i aria-hidden="true" class="fa fa-lg fa-file-text"></i> Publicações</a> 
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 m-auto">
+        <h1 class="text-center display-4 my-4"> CRUD de Projetos - IF4Health </h1>
+        <form enctype="multipart/form-data" action="/students/myForm" method="POST">
+          <div class="form-group">
+
+            <label>Upload img do projeto</label>
+            <input class="form-control-file" type="file" name="mypic" required>
+            <small class="form-text text-muted">(escala: baxinho mas gordão)</small>
+          </div>
+
+          <div class="form-group">
+            <label>Titulo do Projeto:</label>
+            <input class="form-control" type="text" placeholder="titulo" name="tittle" required>
+            <input class="form-control" type="text" placeholder="descrição" name="description" required>
+            <input class="form-control" type="text" placeholder="vigência" name="vigency" required>
+          </div>
+
+          <div class="form-group">
+            <label>Status:</label> 
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="status" value="Sendo Planejado" required> 
+              <label class="form-check-label">Sendo Planejado</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="status" value="Em Andamento"> 
+              <label class="form-check-label">Em Andamento</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="status" value=""> 
+              <label class="form-check-label">Finalizado</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <h3><label>Links:</label></h3>
+            <input class="form-control" type="email" placeholder="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" required>
+            <input class="form-control" type="text" placeholder="http://lattes.cnpq.br/8570090119222585" pattern="http://lattes.cnpq.br/[0-9]{3,}" name="lattes" required>
+            <input class="form-control" type="text" placeholder="https://www.linkedin.com/in/andre-del-mestre/" pattern="" name="linkedin">
+            <input class="form-control" type="text" placeholder="https://github.com/andredelmestre" pattern="" name="github">
+          </div>
+
+          <!-- Vou criar um botao para finalizar a participacao do aluno em UPDATE -->
+          <input type="hidden" name="status" value="Em andamento">
+          <button type="submit" class="btn btn-success btn-block">Submit</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <h1> Painel de Estudantes </h1>
+
+  <table class="table table-sm">
+  <thead class="thead-dark">
+    <tr>
+      <th>Botoes</th>
+      <th>Status</th>
+      <th>IMG</th>
+      <th>Nome</th>
+      <th>Titulo</th>
+      <th>Tipo</th>
+      <th>Curso</th>
+    </tr>
+  </thead>
+    <% for(var i = 0; i < students.length; i++) {%>
+      <% if(students[i].status == "Em andamento") {%>
+    <tr>
+        <% }else{ %>
+    <tr class="table-secondary">
+
+        <% }%>
+      <td class="btn-group">
+          <button class="btn btn-outline-danger btn-sm delete-student" name="<%= students[i]._id %>">Delete</button>
+          <% if(students[i].status == "Em andamento") {%>
+            <button class="btn btn-outline-success btn-sm update-student" name="<%= students[i]._id %>">Finalizar</button>
+          <% }%>
+      </td>
+      <td><%= students[i].status %></td>
+      <td>
+        <% if(students[i].mypic) {%>
+          <img class="rounded-circle" src="/images/<%= students[i].mypic %>" alt="Foto de <%= students[i].name %>" style="width:60px;">
+        <% }else{ %>
+          Sem imagem
+        <% }%>
+      </td>
+      <td><%= students[i].name %></td>
+      <td><%= students[i].quote %></td>
+      <td><%= students[i].tipo %></td>
+      <td><%= students[i].curso %></td>
+    </tr>
+    <% } %>
+  </table>
+  <script src="/javascripts/new-main.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
