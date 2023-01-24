@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router({});
-router.get('/', async (_req, res, _next) => {
 
+router.get('/', async (_req, res, _next) => {
     const healthcheck = {
         uptime: process.uptime(),
         message: 'OK',
         timestamp: Date.now()
     };
+
     try {
-        res.send(healthcheck);
+        res.status(200).send(healthcheck);
     } catch (error) {
         healthcheck.message = error;
         res.status(503).send();
