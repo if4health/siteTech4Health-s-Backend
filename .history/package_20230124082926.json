@@ -4,8 +4,8 @@
   "description": "quarto app usando MERN stak",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "start": "npm install && node ./bin/www",
+    "dev": "npm install && nodemon ./bin/www",
   },
   "author": "Andre del Mestre",
   "license": "UNLICENSED",
