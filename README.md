@@ -1,6 +1,6 @@
 # IF4Health Site Management
 
-maded by André Del Mestre, I just inserted projects's crud and updated some files.
+maded by [https://github.com/andredelmestre], I just inserted projects's crud and updated some files.
 
 ![](https://if4health.netlify.app/logo/opt-if4health-halfsize.png)
 
