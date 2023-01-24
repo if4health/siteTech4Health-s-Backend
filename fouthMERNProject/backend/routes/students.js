@@ -14,10 +14,10 @@ router.use('/myForm', (req, res, next) => {
   next();
 });
  
-const { DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME } = process.env
+const { DB_URI, DB_NAME } = process.env;
 
 // Lets Use a local Mongo DB
-let connString = `mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/?authSource=admin`
+let connString = DB_URI;
 // let connString = `mongodb://${DB_HOST}:${DB_PORT}`
 // console.log(connString)
 
