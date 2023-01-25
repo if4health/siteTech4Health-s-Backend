@@ -15,7 +15,7 @@
 
       function newMemberInput(){
         memberCount += 1;
-        document.getElementById("member").insertAdjacentHTML("beforeend", `
+        document.getElementById("members").insertAdjacentHTML("beforeend", `
           <div id=member${memberCount}>  
             <input class="form-control" type="text" placeholder="Membro" name="Membro${memberCount}" required>
             <button class="btn btn-outline-danger btn-sm" onClick="deleteMember(${memberCount})"><i aria-hidden="true" class="fa fa-trash"></i></button>              
@@ -27,14 +27,14 @@
           scholarCount += 1;
           document.getElementById("scholars").insertAdjacentHTML("beforeend", `
             <div id=scholar${scholarCount}>
-              <input class="form-control" type="text" placeholder=Bolsista" name=scholar${scholarCount}" required>
-              <button class="btn btn-outline-danger btn-sm" onClick="deletScholar(${scholarCount})"><i aria-hidden="true" class="fa fa-trash"></i></button>
+              <input class="form-control" type="text" placeholder="Bolsista" name="scholar${scholarCount}" required>
+              <button class="btn btn-outline-danger btn-sm" onClick="deleteScholar(${scholarCount})"><i aria-hidden="true" class="fa fa-trash"></i></button>
             </div> 
           `);
       }
 
       function deleteMember(id){
-        document.querySelector(`#members` + id).remove();
+        document.querySelector(`#member` + id).remove();
       }
 
       function deleteScholar(id){
@@ -109,14 +109,14 @@
             <div id="members">
               <input class="form-control" type="text" placeholder="Membro" name="member1" required>
             </div>
-            <button class="btn btn-outline-primary btn-sm" onclick="newMemberInput()" style="color: #82888c; border-color:#82888c">Adicionar Outro Membro</button>
+              <a role="button" class="btn btn-outline-primary btn-sm" onclick="newMemberInput()" style="color: #82888c; border-color:#82888c">Adicionar Outro Membro</a>
             <br/>
             <br/>
 
             <div id="scholars">
                 <input class="form-control" type="text" placeholder="Bolsista" name="scholar1">
             </div>
-            <button class="btn btn-outline-primary btn-sm" onclick="newSchoolarInput()" style="color: #82888c; border-color:#82888c">Adicionar Outro Bolsista</button>
+            <a role="button" class="btn btn-outline-primary btn-sm" onclick="newScholarInput()" style="color: #82888c; border-color:#82888c">Adicionar Outro Membro</a>
             <br/>
           </div>
 
