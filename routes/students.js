@@ -16,10 +16,7 @@ router.use('/myForm', (req, res, next) => {
  
 const { DB_URI, DB_NAME } = process.env;
 
-// Lets Use a local Mongo DB
 let connString = DB_URI;
-// let connString = `mongodb://${DB_HOST}:${DB_PORT}`
-// console.log(connString)
 
 mongoose.connect(connString, {dbName : DB_NAME, useNewUrlParser: true, useUnifiedTopology: true})
   .then(client => {
@@ -30,7 +27,6 @@ mongoose.connect(connString, {dbName : DB_NAME, useNewUrlParser: true, useUnifie
     router.get('/data', (req, res) => {
       Student.find()
         .then(results => {
-          // console.log(results)
           res.json(results)
         })
         .catch(error => console.error(error.message))
@@ -41,7 +37,6 @@ mongoose.connect(connString, {dbName : DB_NAME, useNewUrlParser: true, useUnifie
     router.get('/', (req, res) => {
       Student.find()
         .then(results => {
-          //console.log(results)
           res.render('students.ejs', { students: results })
         })
         .catch(error => console.error(error.message))

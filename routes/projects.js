@@ -16,22 +16,26 @@ router.use('/myForm', (req, res, next) => {
 
 const { DB_URI, DB_NAME } = process.env;
 
-// Lets Use a local Mongo DB
 let connString = DB_URI;
-// let connString = `mongodb://${DB_HOST}:${DB_PORT}`
-
-console.log(connString)
 
 mongoose.connect(connString, { dbName: DB_NAME, useNewUrlParser: true, useUnifiedTopology: true })
   .then(client => {
     console.log('projects - Mongoose Connected to Database')
+
+
+    router.get('/data', (req, res) => {
+      Project.find()
+        .then(results => {
+          res.json(results)
+        })
+        .catch(error => console.log(error.message))
+    })
 
     // @route GET /
     // @desc Loads form and table of CRUD works.
     router.get('/', (req, res) => {
       Project.find()
         .then(results => {
-          // console.log(results)
           res.render('projects.ejs', { projects: results })
         })
         .catch(error => console.error(error.message))
@@ -76,22 +80,12 @@ mongoose.connect(connString, { dbName: DB_NAME, useNewUrlParser: true, useUnifie
       
       const project = new Project(req.body)
 
-      console.log(project)
-
       project.save()
         .then(results => {
           console.log(project)
           res.redirect('/projects/');
         })
         .catch(error => console.error(error.message))  
-    });
-
-    router.get('/getAll', (req, res) => {
-      Project.find((err, data) => {
-          err
-          ? res.status(500).json(err)
-          : res.status(201).send(data)
-      });
     });
     
     router.delete('/delete/:id', (req, res) => {
@@ -102,18 +96,6 @@ mongoose.connect(connString, { dbName: DB_NAME, useNewUrlParser: true, useUnifie
         })
         .catch(error => console.error(error))
     })
-
-    router.delete('/all', (req, res) => {
-      // Project.find((err, data) => {
-      //   data != JSON.parse("[]") ?
-        Project.collection.drop((err) => {
-          err
-          ? console.log(err)
-          : res.status(200).send({"message":"todos os projetos foram deletados"});
-        })
-    //     : res.status(200).send({"message":"todos os projetos já estavam deletados"});
-    //   });
-    });
   });
 
 module.exports = router;
