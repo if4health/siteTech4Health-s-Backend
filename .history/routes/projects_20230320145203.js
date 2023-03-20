@@ -41,7 +41,7 @@ mongoose.connect(connString, { dbName: DB_NAME, useNewUrlParser: true, useUnifie
     // @desc insert a new project into the CRUD.
     router.post('/myForm', async (req, res) => {
       let corpse = prepareBody(req.body);
-      console.log(corpse);
+      console.log(corpse)
       corpse.mypic = req.files.mypic.name;
       let project = new Project(corpse);
       project.save()

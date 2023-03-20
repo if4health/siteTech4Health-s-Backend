@@ -10,7 +10,7 @@ module.exports = function prepareBody(body){
 	}
 
 	bodyKeys.forEach((e) => {
-	  if(e.charAt(0) == 'm'){
+	  if(e.charAt(0) == 'd'){
 		members.push(
 		  {
 			"name" :  bodyValues[bodyKeys.indexOf(e)]
