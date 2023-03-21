@@ -184,6 +184,11 @@
       <td><%= works[i].local %></td>
       <td>
         <% 
+        var autores=works[i].coorientadores;
+        for(var j = 0; j < autores.length; j++) {
+        %>
+          <%= autores[j].name %>, 
+        <% } 
         autores=works[i].authors;
         for(var j = 0; j < autores.length; j++) {
         %>
