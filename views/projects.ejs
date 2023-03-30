@@ -166,7 +166,7 @@
       </td>
       <td>
         <% if(projects[i].mypic) {%>
-          <img class="rounded-circle" src="/images/<%= projects[i].mypic %>" alt="Foto de <%= projects[i].name %>" style="width:60px;">
+          <img class="rounded-circle" src="<%= url + projects[i].mypic %>" alt="Foto de <%= projects[i].name %>" style="width:60px;">
         <% }else{ %>
           Sem imagem
         <% }%>

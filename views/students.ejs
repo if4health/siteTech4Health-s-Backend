@@ -131,11 +131,8 @@
       </td>
       <td><%= students[i].status %></td>
       <td>
-        <% if(students[i].mypic) {%>
-          <img class="rounded-circle" src="/images/<%= students[i].mypic %>" alt="Foto de <%= students[i].name %>" style="width:60px;">
-        <% }else{ %>
-          Sem imagem
-        <% }%>
+        <!-- <img class="rounded-circle" src=`https://${process.env.BUCKET_NAME}.s3.${process.env.BUCKET_REGION}.amazonaws.com/img/${students[i].mypic}` alt="<%= students[i].name %>" style="width:60px;"> -->
+        <img class="rounded-circle" src="<%= url + students[i].mypic %>" alt="<%= students[i].name %>" style="width:60px;">
       </td>
       <td><%= students[i].name %></td>
       <td><%= students[i].quote %></td>

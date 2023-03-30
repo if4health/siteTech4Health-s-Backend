@@ -5,7 +5,8 @@ const path = require("path")
 const mongoose = require('mongoose')
 const Work = require('../schema/work')
 
-const myPdfUpload = require('../middleware/upload');
+const myPdfUpload = require('../middleware/upload/AWS/S3-bucket-pdf');
+const deleteBucketFile = require('../middleware/upload/AWS/S3-Bucket-pdf-delete');
 
 router.use('/myForm', (req, res, next) => {
   console.log(req.body)
@@ -13,7 +14,7 @@ router.use('/myForm', (req, res, next) => {
   next();
 });
 
-const { DB_URI, DB_NAME } = process.env;
+const { DB_URI, DB_NAME, BUCKET_NAME, BUCKET_REGION } = process.env;
 
 // Lets Use a local Mongo DB
 let connString = DB_URI;
@@ -29,7 +30,7 @@ mongoose.connect(connString, {dbName : DB_NAME, useNewUrlParser: true, useUnifie
     router.get('/', (req, res) => {
       Work.find()
         .then(results => {
-          res.render('works.ejs', { works: results })
+          res.render('works.ejs', { works: results, url: "https://"+BUCKET_NAME+".s3."+BUCKET_REGION+".amazonaws.com/pdf/" })
         })
         .catch(error => console.error(error.message))
     })
@@ -114,14 +115,38 @@ mongoose.connect(connString, {dbName : DB_NAME, useNewUrlParser: true, useUnifie
       });  
     });
 
-  router.delete('/delete/:id', (req, res) => {
-    Work.deleteOne({ "_id": req.params.id })
-      .then(result => {
-        // console.log(result)
-        res.json(result)
-      })
-      .catch(error => console.error(error))
-    })
+    router.delete('/delete/:id', (req, res) => {
+      Work.findById(req.params.id)
+        .then((requisition, response) => {
+          const fileName = requisition.mywork;
+    
+          Work.findByIdAndDelete(req.params.id)
+            .then(Work => {
+              deleteBucketFile(fileName)
+                .then(() => {
+                  res.status(200).send({ message: "Publicação excluída com sucesso!" });
+                })
+                .catch(error => {
+                  console.error(error);
+                  res.status(500).send({ message: "Ocorreu um erro ao excluir o arquivo PDF do bucket Amazon S3." });
+                });
+            })
+            .catch(error => {
+              console.error(error);
+              res.status(500).send({ message: "Não foi possível excluir o arquivo com o id " + req.params.id });
+            });
+        })
+        .catch(error => console.error(error));
+    });
+
+  // router.delete('/delete/:id', (req, res) => {
+  //   Work.deleteOne({ "_id": req.params.id })
+  //     .then(result => {
+  //       // console.log(result)
+  //       res.json(result)
+  //     })
+  //     .catch(error => console.error(error))
+  //   })
   })
   .catch(error => console.error(error))
 

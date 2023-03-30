@@ -172,7 +172,7 @@
     %>
     <tr>
       <td class="btn-group">
-          <a href="/pdf/<%= works[i].mywork %>" class="btn btn-outline-success btn-sm" target="_blank" role="button"><i aria-hidden="true" class="fa fa-download"></i></a>
+          <a href="<%= url + works[i].mywork %>" class="btn btn-outline-success btn-sm" target="_blank" role="button"><i aria-hidden="true" class="fa fa-download"></i></a>
           <% if(works[i].link != "") {%>
             <a href="<%= works[i].link %>" class="btn btn-outline-success btn-sm" target="_blank" role="button">Link &raquo;</a>
           <% }%>
