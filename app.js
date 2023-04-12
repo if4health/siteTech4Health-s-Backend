@@ -12,6 +12,7 @@ const fileUpload = require('express-fileupload');
 
 var app = express();
 
+
 // Make sure you place body-parser before your CRUD handlers!
 
 // view engine setup
@@ -27,9 +28,10 @@ app.use(function (req, res, next) {
 });
 
 app.use(logger('dev'));
+app.use(express.static('public')); 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 // Use express-fileupload
 app.use(fileUpload());

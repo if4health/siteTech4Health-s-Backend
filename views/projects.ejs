@@ -1,302 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>IF4HEALTH Site Management</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>IF4HEALTH Site Management</title>
 
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">  
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="https://if4health.netlify.app/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="https://if4health.netlify.app/css/timeline.css">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">  
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="https://if4health.s3.sa-east-1.amazonaws.com/gambiarra/css/stylesheets/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="https://if4health.s3.sa-east-1.amazonaws.com/gambiarra/css/stylesheets/timeline.css">
 
-    <script type="text/javascript" async>
-      let memberCount = 1;
-      let scholarCount = 1;
+        <script type="text/javascript" async>
+            let memberCount = 1;
+            let scholarCount = 1;
 
-      function newMemberInput(){
-        memberCount += 1;
-        document.getElementById("members").insertAdjacentHTML("beforeend", `
-          <div id=member${memberCount}>  
-            <input class="form-control" type="text" placeholder="Membro" name="membro${memberCount}" required>
-            <button class="btn btn-outline-danger btn-sm" onClick="deleteMember(${memberCount})"><i aria-hidden="true" class="fa fa-trash"></i></button>              
-          </div>  
-        `);
-      }
-
-      function newScholarInput(){
-          scholarCount += 1;
-          document.getElementById("scholars").insertAdjacentHTML("beforeend", `
-            <div id=scholar${scholarCount}>
-              <input class="form-control" type="text" placeholder="Bolsista" name="scholar${scholarCount}" required>
-              <button class="btn btn-outline-danger btn-sm" onClick="deleteScholar(${scholarCount})"><i aria-hidden="true" class="fa fa-trash"></i></button>
-            </div> 
-          `);
-      }
-
-      function deleteMember(id){
-        document.querySelector(`#member` + id).remove();
-      }
-
-      function deleteScholar(id){
-        document.querySelector(`#scholar` + id).remove();
-      }
-
-    </script>
-
-  </head>
-<body>
-  <nav name="topo" class="navbar navbar-expand-lg navbar-dark">
-    <button class="navbar-toggler" data-target="#myNavbar" data-toggle="collapse" type="button">
-    <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="navbar-nav">
-        <li>
-          <a class="nav-link" href="/"><i aria-hidden="true" class="fa fa-lg fa-home"></i> Home</a>
-        </li>
-        <li>
-          <a class="nav-link" href="/students"><i aria-hidden="true" class="fa fa-lg fa-users"></i> Alunos</a>
-        </li>
-        <li>
-          <a class="nav-link" href="/works"><i aria-hidden="true" class="fa fa-lg fa-file-text"></i> Publicações</a> 
-        </li>
-        <li>
-          <a class="nav-link" href="/projects"><i aria-hidden="true" class="fa fa-lg fa-file-text"></i> Projetos</a> 
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-md-9 m-auto">
-        <h1 class="text-center display-4 my-4"> CRUD de Projetos - IF4Health </h1>
-        <form enctype="multipart/form-data" action="/projects/myForm" method="POST">
-          <div class="form-group">
-            <label>Upload img do projeto</label>
-            <input class="form-control-file" type="file" name="mypic" required>
-            <small class="form-text text-muted">(formatos aceitos: JPG, JPEG, PNG)</small>
-          </div>
-
-          <div class="form-group">
-            <label>Titulo do Projeto:</label>
-            <input class="form-control" type="text" placeholder="titulo" name="tittle" required>
-            <input class="form-control" type="text" placeholder="descrição" name="description" required>
-          </div>
-
-          <div class="form-group">
-            <label>Data de Inicio</label>
-            <input class="form-control" type="date" name="dataInicio" required>
-          </div>
-
-          <div class="form-group">
-            <label>Data de Encerramento</label>
-            <input class="form-control" type="date" name="dataFim" required>
-          </div>
-
-          <div class="form-group">
-            <h3><label>Autores:</label></h3>
-            <small class="form-text text-muted">Nome completo por extenso</small>
-            <input class="form-control" type="text" placeholder="Coordenador" name="coordinator" required>
-            <br/>
-            <div id="members">
-              <input class="form-control" type="text" placeholder="Membro" name="member1" required>
-            </div>
-              <a role="button" class="btn btn-outline-primary btn-sm" onclick="newMemberInput()" style="color: #82888c; border-color:#82888c">Adicionar Outro Membro</a>
-            <br/>
-            <br/>
-
-            <div id="scholars">
-                <input class="form-control" type="text" placeholder="Bolsista" name="scholar1">
-            </div>
-            <a role="button" class="btn btn-outline-primary btn-sm" onclick="newScholarInput()" style="color: #82888c; border-color:#82888c">Adicionar Outro Membro</a>
-            <br/>
-          </div>
-
-          <button type="submit" class="btn btn-success btn-block">Submit</button>
-          
-        </form>
-      </div>
-    </div>
-  </div>
-  <hr>
-  <h1> Painel de Projetos </h1>
-
-  <table class="table table-sm">
-  <thead class="thead-dark">
-    <tr>
-      <th>Ações</th>
-      <th>Status</th>
-      <th>IMG</th>
-      <th>Vigência</th>
-      <th>Titulo</th>
-      <th>Coordenador</th>
-      <th>Bolsistas</th>
-    </tr>
-  </thead>
-    <% for(var i = 0; i < projects.length; i++) {%>
-      <% if(projects[i].status == "Em andamento") {%>
-    <tr>
-        <% }else{ %>
-    <tr class="table-secondary">
-
-        <% }%>
-      <td class="btn-group">
-          <button class="btn btn-outline-danger btn-sm delete-project" name="<%= projects[i]._id %>">Delete</button>
-          <% if(projects[i].status == "Em andamento") {%>
-            <button class="btn btn-outline-success btn-sm update-project" name="<%= projects[i]._id %>">Finalizar</button>
-          <% }%>
-      </td>
-      <td>
-        <%
-          let status;
-          if(+new Date(projects[i].beginDate) > +new Date()) {
-            status = "A iniciar";
-          } else {
-            if(+new Date(projects[i].endDate) < +new Date()) {
-              status = "Concluído";
-            } else {
-              if(+new Date(projects[i].endDate) > +new Date()){
-                status = "Em andamento";
-              }
+            function newMemberInput(){
+                memberCount += 1;
+                document.getElementById("members").insertAdjacentHTML("beforeend", `
+                    <div id=member${memberCount}>  
+                        <input class="form-control" type="text" placeholder="Membro" name="membro${memberCount}" required>
+                        <button class="btn btn-outline-danger btn-sm" onClick="deleteMember(${memberCount})"><i aria-hidden="true" class="fa fa-trash"></i></button>              
+                    </div>  
+                `);
             }
-          }
-        %>
-          <%= status %>
-      </td>
-      <td>
-        <% if(projects[i].mypic) {%>
-          <img class="rounded-circle" src="<%= url + projects[i].mypic %>" alt="Foto de <%= projects[i].name %>" style="width:60px;">
-        <% }else{ %>
-          Sem imagem
-        <% }%>
-      </td>
-      <td>
-          <% 
-            let begin = new Date(projects[i].beginDate).toString().substr(4, 12);
-            let end = new Date(projects[i].endDate).toString().substr(4, 12);
-          %>
-          <%= "De " + begin + " até " + end %>
-      </td>
-      <td><%= projects[i].tittle %></td>
-      <td><%= projects[i].coordinator %></td>
-      <td><% 
-        var autores=projects[i].members;
-        for(var j = 0; j < autores.length; j++) {
-        %>
-          <%= autores[j].name %>, 
-        <% } %></td>
-      
-    </tr>
-    <% } %>
-  </table>
-  <script src="/javascripts/new-main.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-</body>
+
+            function newScholarInput(){
+                scholarCount += 1;
+                document.getElementById("scholars").insertAdjacentHTML("beforeend", `
+                    <div id=scholar${scholarCount}>
+                        <input class="form-control" type="text" placeholder="Bolsista" name="scholar${scholarCount}" required>
+                        <button class="btn btn-outline-danger btn-sm" onClick="deleteScholar(${scholarCount})"><i aria-hidden="true" class="fa fa-trash"></i></button>
+                    </div> 
+                `);
+            }
+
+            function deleteMember(id){
+                document.querySelector(`#member` + id).remove();
+            }
+
+            function deleteScholar(id){
+                document.querySelector(`#scholar` + id).remove();
+            }
+
+        </script>
+    </head>
+	<body>
+		<nav name="topo" class="navbar navbar-expand-lg navbar-dark">
+			<button class="navbar-toggler" data-target="#myNavbar" data-toggle="collapse" type="button">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="navbar-nav">
+					<li>
+						<a class="nav-link" href="/"><i aria-hidden="true" class="fa fa-lg fa-home"></i> Home</a>
+					</li>
+					<li>
+						<a class="nav-link" href="/students"><i aria-hidden="true" class="fa fa-lg fa-users"></i> Alunos</a>
+					</li>
+					<li>
+						<a class="nav-link" href="/works"><i aria-hidden="true" class="fa fa-lg fa-file-text"></i> Publicações</a> 
+					</li>
+					<li>
+						<a class="nav-link" href="/projects"><i aria-hidden="true" class="fa fa-lg fa-file-text"></i> Projetos</a> 
+					</li>
+				</ul>
+			</div>
+		</nav>
+	
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9 m-auto">
+					<h1 class="text-center display-4 my-4"> CRUD de Projetos - IF4Health </h1>
+					<form enctype="multipart/form-data" action="/projects/myForm" method="POST">
+						<div class="form-group">
+							<label>Upload img do projeto</label>
+							<input class="form-control-file" type="file" name="mypic" required>
+							<small class="form-text text-muted">(formatos aceitos: JPG, JPEG, PNG)</small>
+						</div>
+	
+						<div class="form-group">
+							<label>Titulo do Projeto:</label>
+							<input class="form-control" type="text" placeholder="titulo" name="tittle" required>
+							<input class="form-control" type="text" placeholder="descrição" name="description" required>
+						</div>
+	
+						<div class="form-group">
+							<label>Data de Inicio</label>
+							<input class="form-control" type="date" name="beginDate" required>
+						</div>
+	
+						<div class="form-group">
+							<label>Data de Encerramento</label>
+							<input class="form-control" type="date" name="endDate" required>
+						</div>
+	
+						<div class="form-group">
+							<h3><label>Autores:</label></h3>
+							<small class="form-text text-muted">Nome completo por extenso</small>
+							<input class="form-control" type="text" placeholder="Coordenador" name="coordinator" required>
+							<br/>
+							<div id="members">
+								<input class="form-control" type="text" placeholder="Membro" name="member1" required>
+							</div>
+							<a role="button" class="btn btn-outline-primary btn-sm" onclick="newMemberInput()" style="color: #82888c; border-color:#82888c">Adicionar Outro Membro</a>
+							<br/>
+							<br/>
+	
+							<div id="scholars">
+								<input class="form-control" type="text" placeholder="Bolsista" name="scholar1">
+							</div>
+	 						<a role="button" class="btn btn-outline-primary btn-sm" onclick="newScholarInput()" style="color: #82888c; border-color:#82888c">Adicionar Outro Membro</a>
+            				<br/>	
+          				</div>
+
+          				<button type="submit" class="btn btn-success btn-block">Submit</button>
+          
+        			</form>
+      			</div>
+    		</div>
+  		</div>
+  		<hr>
+  			<h1> Painel de Projetos </h1>
+  			<table class="table table-sm">
+  				<thead class="thead-dark">
+  				  <tr>
+  				    <th>Ações</th>
+  				    <th>Status</th>
+  				    <th>IMG</th>
+  				    <th>Vigência</th>
+  				    <th>Titulo</th>
+  				    <th>Coordenador</th>
+  				    <th>Bolsistas</th>
+  				  </tr>
+  				</thead>
+    			<% for(var i = 0; i < projects.length; i++) { %>
+    			  <% if(projects[i].status == "Em andamento") { %>
+    			<tr>
+    			    <% }else{ %>
+    			<tr class="table-secondary">
+        		<% } %>
+      			<td class="btn-group">
+      			    <button class="btn btn-outline-danger btn-sm delete-project" name="<%= projects[i]._id %>">Delete</button>
+      			    <% if(projects[i].status == "Em andamento") { %>
+      			      <button class="btn btn-outline-success btn-sm update-project" name="<%= projects[i]._id %>">Finalizar</button>
+      			    <% } %>
+      			</td>
+      			<td>
+      				<%
+      			    	const data1 = projects[i].beginDate;
+      			    	const data2 = projects[i].endDate;
+      			    	let status;
+					
+      			    	const begin = new Date(data1.split("/").reverse().join("-"));
+      			    	const end = new Date(data2.split("/").reverse().join("-"));
+      			    	const now = new Date();
+
+      			    	if(now > begin) {
+							if(now == begin || now < end) {
+								status = "Em andamento";
+							}
+							if(now > end){
+								status = "Finalizado";
+							}
+      			    	}
+							else if(now < begin && now < end){
+								status = "A inciar";
+							}
+
+					%>
+      			    <%= status %>
+      			</td>
+    			<td>
+					<% if(projects[i].mypic) {%>
+						<img class="rounded-circle" src="<%= url + projects[i].mypic %>" alt="Foto de <%= projects[i].name %>" style="width:60px;">
+					<% }else{ %>
+						Sem imagem
+					<% }%>
+				</td>
+				<td>
+					<%= "De " + projects[i].beginDate + " até " + projects[i].endDate %>
+				</td>
+				<td><%= projects[i].tittle %></td>
+				<td><%= projects[i].coordinator %></td>
+				<td><% 
+						var autores=projects[i].members;
+						for(var j = 0; j < autores.length; j++) {
+					%>
+						<%= autores[j].name %>, 
+					<% } %>
+				</td>
+			</tr>
+		<% } %>
+  		</table>
+  	<script src="/javascripts/new-main.js"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	</body>
 </html>
-
-<!-- 
-function status(body){
-  let status;
-  let end = new Date(body.dataFim);
-  let begin = new Date(body.dataInicio);
-  let today = new Date();
-  
-  dateBegin = begin.getDate() + (begin.getMonth() + 1)
-  dateEnd = end.getDate() + (end.getMonth() + 1)
-  dateToday = today.getDate() + (today.getMonth() + 1)
-  
-  if (this.dateToday.value < this.dateBegin.value) {
-    status = "A iniciar";
-  } else {
-    if (this.dateToday.value > this.dateEnd.value) {
-      status = "Concluído";
-    } else {
-      status = "Em Andamento";
-    }
-  }
-  return status;	
-} -->
-
-<!-- 
-function getMonthNumber(when){
-  let month = when.toString().substr(4, 3);
-  let token;
-
-  switch(month) {
-    case "Jan":
-    token = 1;
-    break;
-
-    case "Feb":
-    token = 2;
-    break;
-
-    case "Mar":
-    token = 3;
-    break;
-
-    case "Apr":
-    token = 4;
-    break;
-
-    case "May":
-    token = 5;
-    break;
-
-    case "Jun":
-    token = 6;
-    break;
-
-    case "Jul":
-    token = 7;
-    break;
-
-    case "Aug":
-    token = 8;
-    break;
-
-    case "Sep":
-    token = 9;
-    break;
-
-    case "Oct":
-    token = 10;
-    break;
-
-    case "Nov":
-    token = 11;
-    break;
-
-    case "Dec":
-    token = 12;
-    break;
-  }
-  return token;
-}
-      
-let todayValue = todayy.toString().substr(8, 2) + getMonthNumber(todayy) + todayy.toString().substr(11, 4);
-let endValue = endd.toString().substr(8, 2) + endd.toString().substr(4, 3) + endd.toString().substr(11, 4);
-
-
-
-const isToday = () => {
-  return endd.toString().substr(8, 2) === todayy.toString().substr(8, 2) && 
-  endd.getMonthNumber(endd) === today.toString().substr(4, 3) && 
-  todayy.toString().substr(11, 4) === endd.toString().substr(11, 4)
-}
-
-const isBefore = () => {
-  return endd.toString().substr(8, 2) === todayy.toString().substr(8, 2) || 
-  endd.getMonthNumber(endd) === today.toString().substr(4, 3) || 
-  todayy.toString().substr(11, 4) === endd.toString().substr(11, 4)
-}
-
-if(isToday){
-  status = ""
-} else {
-
-}
-
-%> -->

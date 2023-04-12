@@ -1,4 +1,10 @@
+
 module.exports = function prepareBody(body){
+	function dateFormatParser(data) {
+		const dateParts = data.split('-');
+		return dateParts[2] + '/' + dateParts[1] + '/' + dateParts[0];
+	}
+
 	let bodyKeys = [];
 	let bodyValues = [];
 	let members = [];
@@ -31,8 +37,12 @@ module.exports = function prepareBody(body){
 
 	body.members = members;
 	body.scholars = scholars;
-	body.beginDate = new Date(body.dataInicio);
-	body.endDate = new Date(body.dataFim);
-	
+	body.beginDate = dateFormatParser(body.beginDate);
+	body.endDate = dateFormatParser(body.endDate);
+
+	console.log("------------------------------------------------------------------------");
+	console.log("data de inicio: " + dateFormatParser(body.beginDate));
+	console.log("------------------------------------------------------------------------");
+
 	return body;	
 }

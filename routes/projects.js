@@ -3,12 +3,10 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 const Project = require('../schema/projects')
-// const myImgUpload = require('../middleware/upload');
 const myImgUpload = require('../middleware/upload/AWS/S3-Bucket-image');
 const deleteBucketImage = require('../middleware/upload/AWS/S3-Bucket-image-delete');
 
 router.use('/myForm', (req, res, next) => {
-  console.log(req.body)
   myImgUpload.myImgUploadFunction(req, res, "projects");
   next();
 });
@@ -35,6 +33,7 @@ mongoose.connect(connString, { dbName: DB_NAME, useNewUrlParser: true, useUnifie
       Project.find()
       .then(results => {
         res.render('projects.ejs', { projects: results, url: "https://"+BUCKET_NAME+".s3."+BUCKET_REGION+".amazonaws.com/img/projects/" })
+        console.log(results)
       })
       .catch(error => console.error(error.message))
     })
@@ -43,29 +42,13 @@ mongoose.connect(connString, { dbName: DB_NAME, useNewUrlParser: true, useUnifie
     // @desc insert a new project into the CRUD.
     router.post('/myForm', async (req, res) => {
       let corpse = prepareBody(req.body);
-      console.log(corpse);
       corpse.mypic = req.files.mypic.name;
       let project = new Project(corpse);
-      project.save()
-      
-      .then(results => {
-          console.log(corpse);
-          res.redirect('/projects/');
-        })
-        
-        .catch(error => console.error(error.message))  
+      project
+        .save()
+        .then(results => res.redirect('/projects/'))
+        .catch(error => console.error(error.message));
     });
-    
-    // @route DELETE /
-    // @desc delte some CRUD's data.
-    // router.delete('/delete/:id', (req, res) => {
-    //   Project.deleteOne({ "_id": req.params.id })
-    //     .then(result => {
-    //     // console.log(result)
-    //     res.json(result)
-    //   })
-    //   .catch(error => console.error(error))
-    // })
 
     router.delete('/delete/:id', (req, res) => {
 			Project.findById(req.params.id)

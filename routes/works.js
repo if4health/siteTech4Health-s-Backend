@@ -57,7 +57,11 @@ mongoose.connect(connString, {dbName : DB_NAME, useNewUrlParser: true, useUnifie
     })
   
     router.post('/myForm', async (req, res) => {
-      const date = new Date(req.body.data);
+      function dateFormatParser(data) {
+        const dateParts = data.split('-');
+        return dateParts[2] + '/' + dateParts[1] + '/' + dateParts[0];
+      }
+
       let bodyKeys = [];
       let bodyValues = [];
       let coorientadores = [];
@@ -89,20 +93,13 @@ mongoose.connect(connString, {dbName : DB_NAME, useNewUrlParser: true, useUnifie
           )
         }
       })
-    
-      // console.log(authors);
 
       req.body.coorientadores = coorientadores;
       req.body.authors = authors;
       req.body.mywork = req.files.mywork.name;
-      req.body.day = date.getDate();
-      req.body.month = date.getUTCMonth();
-      req.body.year = date.getUTCFullYear();
+      req.body.date = dateFormatParser(req.body.data);
 
       let work = new Work(req.body);
-
-      // console.log(work)
-      // console.log(req.body)
 
       work.save((err, data) => {
         if (err) {

@@ -21,35 +21,28 @@ const workSchema = new mongoose.Schema({
 		type : String,
 		required : true
 	},
+	
 	tipo : {
 		type : String,
 		required : true
 	},
+
 	periodico : {
 		type : String,
 		required : true
 	},
+
 	local : {
 		type : String,
 		required : true
 	},
-	data : {
-		type : Date,
-		required : true,
-		default : () => new Date.now()
-	},
-	day : {
-		type : Number,
-		required : true
-	},
-	month : {
-		type : Number,
-		required : true
-	},
-	year : {
-		type : Number,
-		required : true
-	},
+
+	date : {
+        type : String,
+        default : undefined,
+        required : true
+    },
+
 	link : {
 		type : String,
 		required : false
