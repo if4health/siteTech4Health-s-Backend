@@ -1,24 +1,23 @@
-var createError = require('http-errors');
-var path = require('path');
-var bodyParser= require('body-parser')
-var studentsRouter = require('./routes/students');
-var worksRouter = require('./routes/works');
-let projectsRouter = require('./routes/projects');
 let healthcheck = require('./routes/healthCheck');
-var indexRouter = require('./routes/index');
-var express = require('express');
-var logger = require('morgan');
+
+let createError = require('http-errors');
+let path = require('path');
+let bodyParser= require('body-parser')
+let express = require('express');
+let logger = require('morgan');
 const fileUpload = require('express-fileupload');
 
-var app = express();
+let indexRouter = require('./routes/index');
+let studentsRouter = require('./routes/students');
+let worksRouter = require('./routes/works');
+let projectsRouter = require('./routes/projects');
+let linkTreesRouter = require('./routes/linkTrees');
 
+let app = express();
 
-// Make sure you place body-parser before your CRUD handlers!
-
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-//accept JSON data, please
+
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -31,7 +30,6 @@ app.use(logger('dev'));
 app.use(express.static('public')); 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-// app.use(express.static(path.join(__dirname, 'public')));
 
 // Use express-fileupload
 app.use(fileUpload());
@@ -40,6 +38,7 @@ app.use('/', indexRouter);
 app.use('/works', worksRouter);
 app.use('/students', studentsRouter);
 app.use('/projects', projectsRouter);
+app.use('/linkTrees', linkTreesRouter);
 app.use('/healthCheck', healthcheck);
 
 // catch 404 and forward to error handler

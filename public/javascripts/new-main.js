@@ -74,7 +74,25 @@ for (let i = 0; i < ProjectsDeleterId.length; i++) {
       .then(data => {
         window.location.reload()
       })
-  // console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    })
+}
+///////
+
+const LinkTreesDeleterId = document.querySelectorAll('.delete-linktree')
+
+for (let i = 0; i < LinkTreesDeleterId.length; i++) {
+  LinkTreesDeleterId[i].addEventListener('click', _ => {
+    console.log(LinkTreesDeleterId[i].name)
+    fetch('/linktrees/delete/'+LinkTreesDeleterId[i].name  , {
+      method: 'delete',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(res => {
+        if (res.ok) return res.json()
+      })
+      .then(data => {
+        window.location.reload()
+      })
   })
 }
 

@@ -23,6 +23,7 @@ let connString = DB_URI;
 
 mongoose.connect(connString, {dbName : DB_NAME, useNewUrlParser: true, useUnifiedTopology: true})
 	.then(client => {
+		console.log('------------------------------------------')
 		console.log('students - Mongoose Connected to Database')
 
 		// @route GET /log
