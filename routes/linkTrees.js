@@ -14,7 +14,7 @@ mongoose.connect(connString, { dbName: DB_NAME, useNewUrlParser: true, useUnifie
         console.log('------------------------------------------')
 
         router.get('/data', (req, res) => {
-          LinkTree.find()ko
+          LinkTree.find()
           .then(results => {
             res.json(results)
           })
