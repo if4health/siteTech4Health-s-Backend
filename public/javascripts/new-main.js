@@ -74,26 +74,44 @@ for (let i = 0; i < ProjectsDeleterId.length; i++) {
       .then(data => {
         window.location.reload()
       })
-  // console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    })
+}
+///////
+
+const LinkTreesDeleterId = document.querySelectorAll('.delete-linktree')
+
+for (let i = 0; i < LinkTreesDeleterId.length; i++) {
+  LinkTreesDeleterId[i].addEventListener('click', _ => {
+    console.log(LinkTreesDeleterId[i].name)
+    fetch('/linktrees/delete/'+LinkTreesDeleterId[i].name  , {
+      method: 'delete',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(res => {
+        if (res.ok) return res.json()
+      })
+      .then(data => {
+        window.location.reload()
+      })
   })
 }
 
-// const ProjectUpdaterId = document.querySelectorAll('.update-project')
+const WhiteListDeleterId = document.querySelectorAll('.delete-whiteList')
 
-// for (let i = 0; i < ProjectUpdaterId.length; i++) {
-// ProjectUpdaterId[i].addEventListener('click', _ => {
-//     fetch('/students/update/'+ ProjectUpdaterId[i].name, {
-//       method: 'put',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify({
-//         status: 'Finalizado'
-//       })
-//     })
-//       .then(res => {
-//         if (res.ok) return res.json()
-//       })
-//       .then(data => {
-//         window.location.reload()
-//       })
-//   })
-// }
+console.log(WhiteListDeleterId);
+
+for (let i = 0; i < WhiteListDeleterId.length; i++) {
+  WhiteListDeleterId[i].addEventListener('click', _ => {
+    console.log(WhiteListDeleterId[i].name)
+    fetch('/whiteList/delete/' + WhiteListDeleterId[i].name  , {
+      method: 'delete',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(res => {
+        if (res.ok) return res.json()
+      })
+      .then(data => {
+        window.location.reload()
+      })
+  })
+}

@@ -1,4 +1,3 @@
-
 module.exports = function prepareBody(body){
 	function dateFormatParser(data) {
 		const dateParts = data.split('-');

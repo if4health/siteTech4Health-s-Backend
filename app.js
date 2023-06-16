@@ -1,24 +1,29 @@
-var createError = require('http-errors');
-var path = require('path');
-var bodyParser= require('body-parser')
-var studentsRouter = require('./routes/students');
-var worksRouter = require('./routes/works');
-let projectsRouter = require('./routes/projects');
-let healthcheck = require('./routes/healthCheck');
-var indexRouter = require('./routes/index');
-var express = require('express');
-var logger = require('morgan');
+const healthcheckRouter = require('./routes/healthCheck');
+const createError = require('http-errors');
+const path = require('path');
+const bodyParser= require('body-parser')
+const express = require('express');
+const logger = require('morgan');
 const fileUpload = require('express-fileupload');
 
-var app = express();
+const indexRouter = require('./routes/index');
+const studentsRouter = require('./routes/students');
+const worksRouter = require('./routes/works');
+const projectsRouter = require('./routes/projects');
+const linkTreesRouter = require('./routes/linkTrees');
+const whiteListRouter = require('./routes/auth/whitelist');
+const unauthorizedRouter = require('./routes/unauthorized');
+const loginRouter = require('./routes/login');
 
+const authGoogle = require('./routes/auth/auth');
+const passport = require('passport');
+const session = require('express-session');
 
-// Make sure you place body-parser before your CRUD handlers!
+const app = express();
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-//accept JSON data, please
+
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -28,24 +33,31 @@ app.use(function (req, res, next) {
 });
 
 app.use(logger('dev'));
+app.use(session({secret: "asdasd"}));
 app.use(express.static('public')); 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Use express-fileupload
 app.use(fileUpload());
 
 app.use('/', indexRouter);
+app.use('/auth', authGoogle);
 app.use('/works', worksRouter);
-app.use('/students', studentsRouter);
 app.use('/projects', projectsRouter);
-app.use('/healthCheck', healthcheck);
+app.use('/students', studentsRouter);
+app.use('/linkTrees', linkTreesRouter);
+app.use('/whiteList', whiteListRouter);
+app.use('/healthCheck', healthcheckRouter);
+app.use('/login', loginRouter);
+app.use('/unauthorized', unauthorizedRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+// app.use(function(req, res, next) {
+//   next(createError(404));
+// });
 
 // error handler
 app.use(function(err, req, res, next) {

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IF4HEALTH Site Management</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://if4health-files.s3.sa-east-1.amazonaws.com/stylesheets/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="https://if4health-files.s3.sa-east-1.amazonaws.com/stylesheets/timeline.css">
+
+    <script>
+      function login(){
+        window.location.replace("/auth/google");
+      }
+    </script>
+
+  </head>
+<body>
+  <nav name="topo" class="navbar navbar-expand-lg navbar-dark">
+    <button class="navbar-toggler" data-target="#myNavbar" data-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="myNavbar">
+    </div>
+  </nav>
+  
+  
+  <div class="container">
+    
+    <section class="mt-3">
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <h2 style="width: 13rem; margin: 1rem">Quem é você?</h2>
+          <div class="card mb-3 d-flex align-items-center">
+            <div class="row no-gutters">
+              <div class="col-auto">
+                <img src="https://if4health-files.s3.sa-east-1.amazonaws.com/img/page/banner.png" alt="logomarca if4health IFSul" class="img-fluid-test" style="width: 100%; padding: 1%">
+              </div>
+            </div>
+              <div class="row no-gutters" style="margin-bottom: 3rem;">
+                <div class="container mt-5">
+                  <button onclick="login()" class="btn btn-primary">
+                    <i class="fab fa fa-google"></i>
+                      Continuar com o Google
+                  </button>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

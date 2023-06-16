@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IF4HEALTH Site Management</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://if4health-files.s3.sa-east-1.amazonaws.com/stylesheets/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="https://if4health-files.s3.sa-east-1.amazonaws.com/stylesheets/timeline.css">
+
+</head>
+<body>
+    <nav name="topo" class="navbar navbar-expand-lg navbar-dark">
+        <button class="navbar-toggler" data-target="#myNavbar" data-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="navbar-nav">
+            <li>
+              <a class="nav-link" href="/"><i aria-hidden="true" class="fa fa-lg fa-home"></i> Home</a>
+            </li>
+            <li>
+              <a class="nav-link" href="/students"><i aria-hidden="true" class="fa fa-lg fa-users"></i> Alunos</a>
+            </li>
+            <li>
+              <a class="nav-link" href="/works"><i aria-hidden="true" class="fa fa-lg fa-file-text"></i> Publicações</a> 
+            </li>
+            <li>
+              <a class="nav-link" href="/projects"><i aria-hidden="true" class="fa fa-lg fa-search"></i> Projetos</a> 
+            </li>
+            <li>
+              <a class="nav-link" href="/linkTrees"><i aria-hidden="true" class="fa fa-lg fa-link"></i> Link Trees</a> 
+            </li>
+            <li>
+              <a class="nav-link" href="/whiteList"><i aria-hidden="true" class="fa fa-lg fa-lock"></i> Administradores</a> 
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 m-auto">
+            <h1 class="text-center display-4 my-4"> CRUD de Administradores IF4Health</h1>
+            <form enctype="multipart/form-data" action="/whiteList/add" method="POST">
+                <div class="form-group">
+                    <label>Inserir Novo Administrador:</label>
+                    <input class="form-control" type="text" placeholder="Email" name="email" required>
+                </div>
+                <button type="submit" class="btn btn-success btn-block">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<br><br>
+<hr>
+<br><br>
+
+<table class="table table-sm">
+    <thead class="thead-dark">
+		<tr>
+			<th>Botoes</th>
+			<th>Email</th>
+		</tr>
+    </thead>
+    <% for(var i = 0; i < whiteList.length; i++) {%>
+    <% if(whiteList[i].status == "Em andamento") {%>
+    <tr>
+        <% }else{ %>
+    <tr>
+        <% }%>
+        <td class="btn-group">
+            <button class="btn btn-outline-danger btn-sm delete-whiteList" name="<%= whiteList[i].email %>">Delete</button>
+        </td>
+        <td><%= whiteList[i].email %></td>
+    </tr>
+    <% } %>
+</table>
+
+<script src="/javascripts/new-main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,9 +1,13 @@
 var express = require('express');
 var router = express.Router();
+const { ROOT } = process.env;
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', {});
+router.get('/', async (req, res) => {
+	if (req.isAuthenticated()) {
+		res.render('index', {});
+	} else {
+		res.redirect(ROOT + '/login');
+	}
 });
 
 module.exports = router;
