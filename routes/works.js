@@ -41,30 +41,22 @@ mongoose.connect(connString, {dbName : DB_NAME, useNewUrlParser: true, useUnifie
     // @route GET /log
     // @desc Loads JSON for front-end purposes.
     router.get('/data', (req, res) => {
-      if (req.isAuthenticated()) {
         Work.find()
         .then(results => {
           res.json(results)
         })
         .catch(error => console.error(error.message))
-      } else {
-          res.redirect(ROOT + '/login');
-      }
     })
   
     // @route GET /:id
     // @desc Loads form containing only one work.
     router.get('/:id', (req, res) => {
-      if (req.isAuthenticated()) {
         Work.findById(req.params.id)
         .then(results => {
           // console.log(results)
           res.render('works.ejs', { works: [results] })
         })
         .catch(error => console.error(error.message))
-      } else {
-          res.redirect(ROOT + '/login');
-      }
     })
   
     router.post('/myForm', async (req, res) => {

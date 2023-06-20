@@ -33,15 +33,11 @@ mongoose.connect(connString, { dbName: DB_NAME, useNewUrlParser: true, useUnifie
         })
 		
 		router.get('/data', (req, res) => {
-            if (req.isAuthenticated()) {
                 Project.find()
 				.then(results => {
                     res.json(results)
 				})
 				.catch(error => console.log(error.message))
-            } else {
-                res.redirect(ROOT + '/login');
-            }
         })
 		
         router.post('/myForm', async (req, res) => {

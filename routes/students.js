@@ -27,15 +27,11 @@ mongoose.connect(connString, {dbName : DB_NAME, useNewUrlParser: true, useUnifie
 		// @route GET /log
 		// @desc Loads JSON for front-end purposes.
 		router.get('/data', (req, res) => {
-			if (req.isAuthenticated()) {
 				Student.find()
 				.then(results => {
 					res.json(results)
 				})
 				.catch(error => console.error(error.message))
-			} else {
-				res.redirect(ROOT + '/login');
-			}
 		})
 
 		// @route GET /
@@ -55,15 +51,11 @@ mongoose.connect(connString, {dbName : DB_NAME, useNewUrlParser: true, useUnifie
 		// @route GET /:id
 		// @desc Loads form containing only one student.
 		router.get('/single/:id', (req, res) => {
-			if (req.isAuthenticated()) {
 				Student.findById(req.params.id)
 				.then(results => {
 					res.render('students.ejs', { students: [results], url: "https://"+BUCKET_NAME+".s3."+BUCKET_REGION+".amazonaws.com/img/students/" })
 				})
 				.catch(error => console.error(error.message))
-			} else {
-				res.redirect(ROOT + '/login');
-			}
 		})
 
 		// @route POST /myForm

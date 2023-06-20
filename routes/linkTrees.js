@@ -32,15 +32,11 @@ mongoose.connect(connString, { dbName: DB_NAME, useNewUrlParser: true, useUnifie
         })
 
         router.get('/single/:id', (req, res) => {
-          if (req.isAuthenticated()) {
             LinkTree.findById(req.params.id)
             .then(results => {
               res.status(200).json(results);
             })
             .catch(error => console.error(error.message))
-          } else {
-              res.redirect(ROOT + '/login');
-          }
         })
         
         router.post('/myForm', async (req, res) => {
