@@ -3,3 +3,6 @@ node_modules
 if4health.sublime-workspace
 .env
 .history
+public/files/*
+public/images/*
+!public/images/a.png
