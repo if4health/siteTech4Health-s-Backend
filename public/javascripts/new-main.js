@@ -3,10 +3,11 @@
 // I cant remeber how I learn to code these fetch calls nor where these functions came from.
 // They are front-end functionsjust to enabe table buttons
 const deleteButtonId = document.querySelectorAll('.delete-student')
+const basePath = "tech4healthapi"
 
 for (let i = 0; i < deleteButtonId.length; i++) {
   deleteButtonId[i].addEventListener('click', _ => {
-    fetch('/students/delete/'+deleteButtonId[i].name, {
+    fetch(basePath + '/students/delete/'+deleteButtonId[i].name, {
       method: 'delete',
       headers: { 'Content-Type': 'application/json' },
     })
@@ -23,7 +24,7 @@ const updateButtonId = document.querySelectorAll('.update-student')
 
 for (let i = 0; i < updateButtonId.length; i++) {
   updateButtonId[i].addEventListener('click', _ => {
-    fetch('/students/update/'+updateButtonId[i].name, {
+    fetch(basePath + '/students/update/'+updateButtonId[i].name, {
       method: 'put',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -45,7 +46,7 @@ const deletePaperId = document.querySelectorAll('.delete-paper')
 
 for (let i = 0; i < deletePaperId.length; i++) {
   deletePaperId[i].addEventListener('click', _ => {
-    fetch('/works/delete/'+deletePaperId[i].name, {
+    fetch(basePath + '/works/delete/'+deletePaperId[i].name, {
       method: 'delete',
       headers: { 'Content-Type': 'application/json' },
     })
@@ -64,7 +65,7 @@ const ProjectsDeleterId = document.querySelectorAll('.delete-project')
 
 for (let i = 0; i < ProjectsDeleterId.length; i++) {
   ProjectsDeleterId[i].addEventListener('click', _ => {
-    fetch('/projects/delete/'+ProjectsDeleterId[i].name  , {
+    fetch(basePath + '/projects/delete/'+ProjectsDeleterId[i].name  , {
       method: 'delete',
       headers: { 'Content-Type': 'application/json' },
     })
@@ -83,7 +84,7 @@ const LinkTreesDeleterId = document.querySelectorAll('.delete-linktree')
 for (let i = 0; i < LinkTreesDeleterId.length; i++) {
   LinkTreesDeleterId[i].addEventListener('click', _ => {
     console.log(LinkTreesDeleterId[i].name)
-    fetch('/linktrees/delete/'+LinkTreesDeleterId[i].name  , {
+    fetch(basePath + '/linktrees/delete/'+LinkTreesDeleterId[i].name  , {
       method: 'delete',
       headers: { 'Content-Type': 'application/json' },
     })
@@ -103,7 +104,7 @@ console.log(WhiteListDeleterId);
 for (let i = 0; i < WhiteListDeleterId.length; i++) {
   WhiteListDeleterId[i].addEventListener('click', _ => {
     console.log(WhiteListDeleterId[i].name)
-    fetch('/whiteList/delete/' + WhiteListDeleterId[i].name  , {
+    fetch(basePath + '/whiteList/delete/' + WhiteListDeleterId[i].name  , {
       method: 'delete',
       headers: { 'Content-Type': 'application/json' },
     })

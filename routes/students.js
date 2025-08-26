@@ -4,7 +4,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const Student = require("../schema/student");
 
-const imageService = require("../services/image"); // updated local image service
+const imageService = require("../services/image");
 
 const { DB_URI, DB_NAME, ROOT } = process.env;
 

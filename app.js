@@ -32,6 +32,11 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use((req, res, next) => {
+  res.locals.basePath = req.baseUrl || '';
+  next();
+});
+
 app.use(logger('dev'));
 app.use(session({secret: "asdasd"}));
 app.use(express.static('public')); 
