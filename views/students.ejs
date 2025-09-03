@@ -1,41 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>IF4HEALTH Site Management</title>
 
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">  
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="https://if4health-files.s3.sa-east-1.amazonaws.com/stylesheets/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="https://if4health-files.s3.sa-east-1.amazonaws.com/stylesheets/timeline.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://if4health-files.s3.sa-east-1.amazonaws.com/stylesheets/bootstrap.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://if4health-files.s3.sa-east-1.amazonaws.com/stylesheets/timeline.css">
 
-  </head>
+  <script>
+    window.BASE_PATH = window.location.origin + "<%= basePath %>";
+  </script>
+
+</head>
+
 <body>
-  				  <%- include('partials/navbar') %>
+  <%- include('partials/navbar') %>
 
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-9 m-auto">
-        <h1 class="text-center display-4 my-4"> CRUD de alunos - IF4Health </h1>
-        <form enctype="multipart/form-data" action="<%= basePath %>/students/myForm" method="POST">
-          <div class="form-group">
-            <label>Upload img do aluno</label>
-            <input class="form-control-file" type="file" name="mypic" required>
-            <small class="form-text text-muted">(escala 1:1)</small>
-          </div>
-          <div class="form-group">
-            <label>Nome do Aluno:</label>
-            <input class="form-control" type="text" placeholder="Nome do Aluno" name="name" required>
-          </div>
-          <div class="form-group">
-            <label>Titulo do Trabalho:</label>
-            <input class="form-control" type="text" placeholder="Titulo do Trabalho" name="quote" required>
-          </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 m-auto">
+          <h1 class="text-center display-4 my-4"> CRUD de alunos - IF4Health </h1>
+          <form enctype="multipart/form-data" action="<%= basePath %>/students/myForm" method="POST">
+            <div class="form-group">
+              <label>Upload img do aluno</label>
+              <input class="form-control-file" type="file" name="mypic" required>
+              <small class="form-text text-muted">(escala 1:1)</small>
+            </div>
+            <div class="form-group">
+              <label>Nome do Aluno:</label>
+              <input class="form-control" type="text" placeholder="Nome do Aluno" name="name" required>
+            </div>
+            <div class="form-group">
+              <label>Titulo do Trabalho:</label>
+              <input class="form-control" type="text" placeholder="Titulo do Trabalho" name="quote" required>
+            </div>
             <div class="form-group">
               <label>Tipo de Vinculo:</label>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="tipo" value="Trabalho de Conclusão do Curso" required>
+                <input class="form-check-input" type="radio" name="tipo" value="Trabalho de Conclusão do Curso"
+                  required>
                 <label class="form-check-label">TCC</label>
               </div>
               <div class="form-check form-check-inline">
@@ -44,86 +54,104 @@
               </div>
             </div>
             <div class="form-group">
-              <label>Curso:</label> 
+              <label>Curso:</label>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="curso" value="Engenharia de Controle e Automação" required> 
+                <input class="form-check-input" type="radio" name="curso" value="Engenharia de Controle e Automação"
+                  required>
                 <label class="form-check-label">ECA</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="curso" value="Tecnologia em Sistemas para Internet"> 
+                <input class="form-check-input" type="radio" name="curso" value="Tecnologia em Sistemas para Internet">
                 <label class="form-check-label">TSI</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="curso" value="Técnico em Mecatrônica"> 
+                <input class="form-check-input" type="radio" name="curso" value="Técnico em Mecatrônica">
                 <label class="form-check-label">MCT</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="curso" value="Técnico em Informática"> 
+                <input class="form-check-input" type="radio" name="curso" value="Técnico em Informática">
                 <label class="form-check-label">INF</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="curso" value="Técnico em Fabricação Mecanica"> 
+                <input class="form-check-input" type="radio" name="curso" value="Técnico em Fabricação Mecanica">
                 <label class="form-check-label">PFM</label>
               </div>
             </div>
-          <div class="form-group">
-            <h3><label>Links:</label></h3>
-            <input class="form-control" type="email" placeholder="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" required>
-            <input class="form-control" type="text" placeholder="http://lattes.cnpq.br/8570090119222585" pattern="http://lattes.cnpq.br/[0-9]{3,}" name="lattes" required>
-            <input class="form-control" type="text" placeholder="https://www.linkedin.com/in/andre-del-mestre/" pattern="https://www.linkedin.com/[a-z0-9._/+-]+" name="linkedin">
-            <input class="form-control" type="text" placeholder="https://github.com/andredelmestre" pattern="https://github.com/[a-z0-9._/+-]+" name="github">
-          </div>
+            <div class="form-group">
+              <h3><label>Links:</label></h3>
+              <input class="form-control" type="email" placeholder="email"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" required>
+              <input class="form-control" type="text" placeholder="http://lattes.cnpq.br/8570090119222585"
+                pattern="http://lattes.cnpq.br/[0-9]{3,}" name="lattes" required>
+              <input class="form-control" type="text" placeholder="https://www.linkedin.com/in/andre-del-mestre/"
+                pattern="https://www.linkedin.com/[a-z0-9._/+-]+" name="linkedin">
+              <input class="form-control" type="text" placeholder="https://github.com/andredelmestre"
+                pattern="https://github.com/[a-z0-9._/+-]+" name="github">
+            </div>
 
-          <!-- Vou criar um botao para finalizar a participacao do aluno em UPDATE -->
-          <input type="hidden" name="status" value="Em andamento">
-          <button type="submit" class="btn btn-success btn-block">Submit</button>
+            <!-- Vou criar um botao para finalizar a participacao do aluno em UPDATE -->
+            <input type="hidden" name="status" value="Em andamento">
+            <button type="submit" class="btn btn-success btn-block">Submit</button>
 
-        </form>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-  <hr>
-  <h1> Painel de Estudantes </h1>
+    <hr>
+    <h1> Painel de Estudantes </h1>
 
-  <table class="table table-sm">
-  <thead class="thead-dark">
-    <tr>
-      <th>Botoes</th>
-      <th>Status</th>
-      <th>IMG</th>
-      <th>Nome</th>
-      <th>Titulo</th>
-      <th>Tipo</th>
-      <th>Curso</th>
-    </tr>
-  </thead>
-    <% for(var i = 0; i < students.length; i++) {%>
-      <% if(students[i].status == "Em andamento") {%>
-    <tr>
-        <% }else{ %>
-    <tr class="table-secondary">
+    <table class="table table-sm">
+      <thead class="thead-dark">
+        <tr>
+          <th>Botoes</th>
+          <th>Status</th>
+          <th>IMG</th>
+          <th>Nome</th>
+          <th>Titulo</th>
+          <th>Tipo</th>
+          <th>Curso</th>
+        </tr>
+      </thead>
+      <% for(var i=0; i < students.length; i++) {%>
+        <% if(students[i].status=="Em andamento" ) {%>
+          <tr>
+            <% }else{ %>
+          <tr class="table-secondary">
 
-        <% }%>
-      <td class="btn-group">
-          <button class="btn btn-outline-danger btn-sm delete-student" name="<%= students[i]._id %>">Delete</button>
-          <% if(students[i].status == "Em andamento") {%>
-            <button class="btn btn-outline-success btn-sm update-student" name="<%= students[i]._id %>">Finalizar</button>
-          <% }%>
-      </td>
-      <td><%= students[i].status %></td>
-      <td>
-        <!-- <img class="rounded-circle" src=`https://${process.env.BUCKET_NAME}.s3.${process.env.BUCKET_REGION}.amazonaws.com/img/${students[i].mypic}` alt="<%= students[i].name %>" style="width:60px;"> -->
-        <img class="rounded-circle" src="<%= url + students[i].mypic %>" alt="<%= students[i].name %>" style="width:60px;">
-      </td>
-      <td><%= students[i].name %></td>
-      <td><%= students[i].quote %></td>
-      <td><%= students[i].tipo %></td>
-      <td><%= students[i].curso %></td>
-    </tr>
-    <% } %>
-  </table>
-  <script src="/javascripts/new-main.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+            <% }%>
+              <td class="btn-group">
+                <button class="btn btn-outline-danger btn-sm delete-student"
+                  name="<%= students[i]._id %>">Delete</button>
+                <% if(students[i].status=="Em andamento" ) {%>
+                  <button class="btn btn-outline-success btn-sm update-student"
+                    name="<%= students[i]._id %>">Finalizar</button>
+                  <% }%>
+              </td>
+              <td>
+                <%= students[i].status %>
+              </td>
+              <td>
+                <img class="rounded-circle" src="<%= url + students[i].mypic %>" alt="<%= students[i].name %>"
+                  style="width:60px;">
+              </td>
+              <td>
+                <%= students[i].name %>
+              </td>
+              <td>
+                <%= students[i].quote %>
+              </td>
+              <td>
+                <%= students[i].tipo %>
+              </td>
+              <td>
+                <%= students[i].curso %>
+              </td>
+          </tr>
+          <% } %>
+    </table>
+    <script src="<%= basePath %>/javascripts/new-main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
+
 </html>

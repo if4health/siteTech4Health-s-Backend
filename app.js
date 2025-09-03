@@ -1,4 +1,3 @@
-const healthcheckRouter = require('./routes/healthCheck');
 const createError = require('http-errors');
 const path = require('path');
 const bodyParser= require('body-parser')
@@ -6,16 +5,10 @@ const express = require('express');
 const logger = require('morgan');
 const fileUpload = require('express-fileupload');
 
-const indexRouter = require('./routes/index');
-const studentsRouter = require('./routes/students');
-const worksRouter = require('./routes/works');
-const projectsRouter = require('./routes/projects');
-const linkTreesRouter = require('./routes/linkTrees');
-const whiteListRouter = require('./routes/auth/whitelist');
-const unauthorizedRouter = require('./routes/unauthorized');
-const loginRouter = require('./routes/login');
+const router = require('./routes/router');
 
-const authGoogle = require('./routes/auth/auth');
+const BASE_PATH = process.env.BASE_PATH;
+
 const passport = require('passport');
 const session = require('express-session');
 
@@ -33,9 +26,13 @@ app.use(function (req, res, next) {
 });
 
 app.use((req, res, next) => {
-  res.locals.basePath = req.baseUrl || '';
+  res.locals.basePath = BASE_PATH || '';
   next();
 });
+
+app.use(BASE_PATH ? `${BASE_PATH}/javascripts` : "/javascripts", express.static(__dirname + '/public/javascripts'));
+app.use(BASE_PATH ? `${BASE_PATH}/images` : "/images", express.static(__dirname + '/public/images'));
+app.use(BASE_PATH ? `${BASE_PATH}/files` : "/files", express.static(__dirname + '/public/files'));
 
 app.use(logger('dev'));
 app.use(session({secret: "asdasd"}));
@@ -48,16 +45,7 @@ app.use(passport.session());
 // Use express-fileupload
 app.use(fileUpload());
 
-app.use('/', indexRouter);
-app.use('/auth', authGoogle);
-app.use('/works', worksRouter);
-app.use('/projects', projectsRouter);
-app.use('/students', studentsRouter);
-app.use('/linkTrees', linkTreesRouter);
-app.use('/whiteList', whiteListRouter);
-app.use('/healthCheck', healthcheckRouter);
-app.use('/login', loginRouter);
-app.use('/unauthorized', unauthorizedRouter);
+app.use(BASE_PATH || "/", router);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

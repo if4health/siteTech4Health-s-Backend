@@ -1,67 +1,67 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const author = new mongoose.Schema({
-    name : {
-        type : String,
-        default : undefined,
-        required : true
-    }, 
+  name: {
+    type: String,
+    default: undefined,
+    required: true,
+  },
 });
 
 const coorientador = new mongoose.Schema({
-    name : {
-        type : String,
-        default : undefined,
-        required : true
-    }, 
+  name: {
+    type: String,
+    default: undefined,
+    required: true,
+  },
 });
 
 const workSchema = new mongoose.Schema({
-	titulo : {
-		type : String,
-		required : true
-	},
-	
-	tipo : {
-		type : String,
-		required : true
-	},
+  titulo: {
+    type: String,
+    required: true,
+  },
 
-	periodico : {
-		type : String,
-		required : true
-	},
+  tipo: {
+    type: String,
+    required: true,
+  },
 
-	local : {
-		type : String,
-		required : true
-	},
+  periodico: {
+    type: String,
+    required: true,
+  },
 
-	date : {
-        type : String,
-        default : undefined,
-        required : true
-    },
+  local: {
+    type: String,
+    required: true,
+  },
 
-	link : {
-		type : String,
-		required : false
-	},
+  date: {
+    type: String,
+    default: undefined,
+    required: true,
+  },
 
-	orientador : {
-		type : String,
-		required: true
-	},
+  link: {
+    type: String,
+    required: false,
+  },
 
-	coorientadores : [ coorientador ],
+  orientador: {
+    type: String,
+    required: true,
+  },
 
-	authors : [ author ],
+  coorientadores: [coorientador],
 
-	mywork : {
-		type : String,
-		required : true,
-		default : undefined
-	}
-})
+  authors: [author],
 
-module.exports = mongoose.model('works',workSchema)
+  mywork: {
+    type: String,
+    required: true,
+    default: undefined,
+  },
+});
+
+module.exports = mongoose.model("works", workSchema);

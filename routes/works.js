@@ -7,6 +7,7 @@ const Work = require("../schema/work");
 const pdfService = require("../services/pdf");
 
 const { DB_URI, DB_NAME, ROOT } = process.env;
+const BASE_PATH = process.env.BASE_PATH;
 
 // Mongo connection
 mongoose
@@ -24,7 +25,10 @@ mongoose
       if (req.isAuthenticated()) {
         Work.find()
           .then((results) => {
-            res.render("works.ejs", { works: results, url: "/files/" });
+            res.render("works.ejs", {
+              works: results,
+              url: BASE_PATH ? BASE_PATH + "/files/" : "/files/",
+            });
           })
           .catch((error) => console.error(error.message));
       } else {
@@ -47,7 +51,7 @@ mongoose
     router.get("/:id", (req, res) => {
       Work.findById(req.params.id)
         .then((results) => {
-          res.render("works.ejs", { works: [results], url: "/files/" });
+          res.render("works.ejs", { works: [results], url: BASE_PATH ? BASE_PATH + "/files/" : "/files/", });
         })
         .catch((error) => console.error(error.message));
     });
@@ -74,7 +78,7 @@ mongoose
         const work = new Work(req.body);
         await work.save();
 
-        res.redirect("/works");
+        res.redirect(ROOT + "/works");
       } catch (err) {
         console.error(err);
         res.status(500).send(err.message);

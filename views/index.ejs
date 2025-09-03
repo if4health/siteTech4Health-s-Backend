@@ -1,56 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>IF4HEALTH Site Management</title>
 
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">  
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="https://if4health-files.s3.sa-east-1.amazonaws.com/stylesheets/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="https://if4health-files.s3.sa-east-1.amazonaws.com/stylesheets/timeline.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://if4health-files.s3.sa-east-1.amazonaws.com/stylesheets/bootstrap.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://if4health-files.s3.sa-east-1.amazonaws.com/stylesheets/timeline.css">
 
-  </head>
+</head>
+
 <body>
   <%- include('partials/navbar') %>
-<div class="container">
+    <div class="container">
 
-<section class="mt-3">
-  <!-- <h2>Sobre</h2> -->
-  <div class="row">
+      <section class="mt-3">
+        <!-- <h2>Sobre</h2> -->
+        <div class="row">
 
-      <div class="col-12 col-md-12">
-           <div class="card mb-3">
+          <div class="col-12 col-md-12">
+            <div class="card mb-3">
               <div class="row no-gutters">
-                  <div class="col-auto">
-                      <img src="https://if4health-files.s3.sa-east-1.amazonaws.com/img/page/logo-quadrado.jpeg" alt="logomarca if4health IFSul" class="img-fluid-test">
+                <div class="col-auto">
+                  <img src="https://if4health-files.s3.sa-east-1.amazonaws.com/img/page/logo-quadrado.jpeg"
+                    alt="logomarca if4health IFSul" class="img-fluid-test">
+                </div>
+                <div class="col">
+                  <div class="card-body text-center">
+                    <h3 class="card-title text-original-dark-blue"><i class="fa fa-info-circle fa-2x"
+                        aria-hidden="true"></i></h3>
+                    <h4 class="card-subtitle mb-2 text-muted">IF4Health Site Management</h4>
+                    <p class="card-text text-justify">
+                      Este projeto foi criardo para estudar MERN (Mongo DB, Express, ReactJS e NodeJS) stack enquanto
+                      desenvolvo um servidor para o
+                      <code><a target="_blank" href="https://if4health.netlify.app/">site IF4Health</a></code>. Somente
+                      duas Secoes do site sao editaveis. O restante eh estatico. Use os botoes abaixo. Lembre-se: eh um
+                      projeto desenvolvido para fins de aprendizagem.
+                    </p>
+                    <p class="card-text text-center">
+                      <a class="btn btn-success mx-3" role="button" href="<%= basePath %>/students"><i
+                          aria-hidden="true" class="fa fa-lg fa-users"></i> Alunos</a>
+                      <a class="btn btn-success mx-3" role="button" href="<%= basePath %>/works"><i aria-hidden="true"
+                          class="fa fa-lg fa-file-text"></i> Publicações</a>
+                      <a class="btn btn-success mx-3" role="button" href="<%= basePath %>/projects"><i
+                          aria-hidden="true" class="fa fa-lg fa-search"></i> Projetos</a>
+                      <a class="btn btn-success mx-3" role="button" href="<%= basePath %>/linktrees"><i
+                          aria-hidden="true" class="fa fa-lg fa-link"></i> Link Trees</a>
+                    </p>
                   </div>
-                  <div class="col">
-                    <div class="card-body text-center">
-                      <h3 class="card-title text-original-dark-blue"><i class="fa fa-info-circle fa-2x" aria-hidden="true"></i></h3>
-                      <h4 class="card-subtitle mb-2 text-muted">IF4Health Site Management</h4>
-                      <p class="card-text text-justify">
-                        Este projeto foi criardo para estudar MERN (Mongo DB, Express, ReactJS e NodeJS) stack enquanto desenvolvo um servidor para o <code><a target="_blank" href="https://if4health.netlify.app/">site IF4Health</a></code>. Somente duas Secoes do site sao editaveis. O restante eh estatico. Use os botoes abaixo. Lembre-se: eh um projeto desenvolvido para fins de aprendizagem. 
-                      </p>
-                      <p class="card-text text-center">
-                        <a class="btn btn-success mx-3" role="button" href="<%= basePath %>/students"><i aria-hidden="true" class="fa fa-lg fa-users"></i> Alunos</a>
-                        <a class="btn btn-success mx-3" role="button" href="<%= basePath %>/works"><i aria-hidden="true" class="fa fa-lg fa-file-text"></i> Publicações</a>
-                        <a class="btn btn-success mx-3" role="button" href="<%= basePath %>/projects"><i aria-hidden="true" class="fa fa-lg fa-search"></i> Projetos</a>
-                        <a class="btn btn-success mx-3" role="button" href="<%= basePath %>/linktrees"><i aria-hidden="true" class="fa fa-lg fa-link"></i> Link Trees</a>
-                      </p>
-                    </div>
-                  </div>
+                </div>
               </div>
+            </div>
           </div>
-      </div>
 
 
+        </div>
+
+      </section>
     </div>
 
-</section>
-</div>
 
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
+
 </html>

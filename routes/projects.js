@@ -6,6 +6,7 @@ const Project = require("../schema/projects");
 const imageService = require("../services/image");
 
 const { DB_URI, DB_NAME, ROOT } = process.env;
+const BASE_PATH = process.env.BASE_PATH;
 
 mongoose
   .connect(DB_URI, {
@@ -25,7 +26,7 @@ mongoose
         const results = await Project.find();
         res.render("projects.ejs", {
           projects: results,
-          url: "/images/projects/",
+          url: BASE_PATH ? BASE_PATH + "/images/projects/" : "/images/projects/",
         });
       } catch (err) {
         console.error(err.message);
@@ -59,7 +60,7 @@ mongoose
         const project = new Project(corpse);
         await project.save();
 
-        res.redirect("/projects/");
+        res.redirect(ROOT + "/projects/");
       } catch (err) {
         console.error(err);
         res.status(500).send(err.message);

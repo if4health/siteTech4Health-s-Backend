@@ -7,6 +7,7 @@ const Student = require("../schema/student");
 const imageService = require("../services/image");
 
 const { DB_URI, DB_NAME, ROOT } = process.env;
+const BASE_PATH = process.env.BASE_PATH;
 
 // MongoDB connection
 mongoose
@@ -28,7 +29,9 @@ mongoose
         const results = await Student.find();
         res.render("students.ejs", {
           students: results,
-          url: "/images/students/",
+          url: BASE_PATH
+            ? BASE_PATH + "/images/students/"
+            : "/images/students/",
         });
       } catch (err) {
         console.error(err.message);
@@ -54,14 +57,16 @@ mongoose
         const result = await Student.findById(req.params.id);
         res.render("students.ejs", {
           students: [result],
-          url: "/images/students/",
+          url: BASE_PATH
+            ? BASE_PATH + "/images/students/"
+            : "/images/students/",
         });
       } catch (err) {
         console.error(err.message);
       }
     });
 
-    // @route POST /myForm
+    // @route POST /myForm  
     // @desc Send student data to DB storage.
     router.post("/myForm", async (req, res) => {
       if (!req.isAuthenticated()) return res.redirect(ROOT + "/login");
@@ -77,7 +82,7 @@ mongoose
         const student = new Student(req.body);
         await student.save();
 
-        res.redirect("/students/");
+        res.redirect(ROOT + "/students/");
       } catch (err) {
         console.error(err);
         res.status(500).send(err.message);
@@ -95,7 +100,7 @@ mongoose
           { $set: { status: req.body.status } },
           { upsert: true }
         );
-        res.redirect("/students/");
+        res.redirect(ROOT + "/students/");
       } catch (err) {
         console.error(err.message);
       }
